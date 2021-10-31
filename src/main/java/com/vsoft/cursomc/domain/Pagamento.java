@@ -1,6 +1,7 @@
 package com.vsoft.cursomc.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.vsoft.cursomc.domain.enuns.EstadoPagamento;
 
@@ -17,7 +18,7 @@ public abstract class Pagamento implements Serializable {
     private Integer id;
     private Integer estado;
 
-    @JsonBackReference
+    @JsonIgnore
     @JoinColumn(name = "pedido_id")
     @OneToOne
     @MapsId
