@@ -1,11 +1,15 @@
 package com.vsoft.cursomc.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 
 @Entity
 public class ItemPedido {
 
+    @JsonIgnore
     @EmbeddedId
     private ItemPedidoPK id = new ItemPedidoPK();
 
@@ -25,6 +29,7 @@ public class ItemPedido {
         this.preco = preco;
     }
 
+    @JsonIgnore
     public Pedido getPedido(){
         return id.getPedido();
     }
