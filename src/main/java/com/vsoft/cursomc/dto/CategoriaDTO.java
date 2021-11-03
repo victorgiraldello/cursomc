@@ -2,7 +2,6 @@ package com.vsoft.cursomc.dto;
 
 import com.vsoft.cursomc.domain.Categoria;
 import org.hibernate.validator.constraints.Length;
-
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
