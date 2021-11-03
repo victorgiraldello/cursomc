@@ -3,6 +3,7 @@ package com.vsoft.cursomc.services;
 import java.util.List;
 import java.util.Optional;
 
+import com.vsoft.cursomc.dto.CategoriaDTO;
 import com.vsoft.cursomc.services.exception.DataIntegrityException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -56,4 +57,7 @@ public class CategoriaService {
 		return repo.findAll(pageRequest);
 	}
 
+	public Categoria fromDTO(CategoriaDTO objDto){
+		return new Categoria(objDto.getId(), objDto.getNome());
+	}
 }
