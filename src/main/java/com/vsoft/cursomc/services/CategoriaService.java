@@ -3,6 +3,7 @@ package com.vsoft.cursomc.services;
 import java.util.List;
 import java.util.Optional;
 
+import com.vsoft.cursomc.domain.Cliente;
 import com.vsoft.cursomc.dto.CategoriaDTO;
 import com.vsoft.cursomc.services.exception.DataIntegrityException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,8 +35,13 @@ public class CategoriaService {
 	}
 
 	public Categoria update(Categoria obj){
-		find(obj.getId());
-		return repo.save(obj);
+		Categoria newObj = find(obj.getId());
+		updateData(newObj, obj);
+		return repo.save(newObj);
+	}
+
+	private void updateData(Categoria newObj, Categoria obj) {
+		newObj.setNome(obj.getNome());
 	}
 
 	public void delete(Integer id){
