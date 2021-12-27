@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import java.text.NumberFormat;
+import java.util.Locale;
 
 @Entity
 public class ItemPedido {
@@ -81,5 +83,22 @@ public class ItemPedido {
 
     public void setPreco(Double preco) {
         this.preco = preco;
+    }
+
+    public String toString() {
+
+        NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("PT", "br"));
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(getProduto().getNome());
+        sb.append(", Qtd: ");
+        sb.append(getQuantidade());
+        sb.append(", Preço unitário: ");
+        sb.append(nf.format(getPreco()));
+        sb.append(", Subtotal: ");
+        sb.append(nf.format(getSubTotal()));
+        sb.append("\n");
+
+        return sb.toString();
     }
 }
