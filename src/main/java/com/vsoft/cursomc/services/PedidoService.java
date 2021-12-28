@@ -9,6 +9,7 @@ import com.vsoft.cursomc.services.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.mail.MessagingException;
 import java.util.Date;
 import java.util.Optional;
 
@@ -43,7 +44,7 @@ public class PedidoService {
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Pedido.class.getName()));
 	}
 
-	public Pedido insert(Pedido obj) {
+	public Pedido insert(Pedido obj){
 		obj.setId(null);
 		obj.setData(new Date());
 		obj.setCliente(clienteService.find(obj.getCliente().getId()));
@@ -63,7 +64,7 @@ public class PedidoService {
 		}
 		itemPedidoRepository.saveAll(obj.getItens());
 
-		emailService.sendOrderConfirmationEmail(obj);
+		emailService.sendOrderConfirmationHtmlEmail(obj);
 
 		return obj;
 	}
