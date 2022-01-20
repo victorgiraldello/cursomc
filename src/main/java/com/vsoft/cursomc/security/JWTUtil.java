@@ -29,7 +29,7 @@ public class JWTUtil {
 
     public boolean tokenValido(String token){
         Claims claims = getClaims(token);
-        if(!claims.isEmpty()){
+        if(claims != null){
             String username = claims.getSubject();
             Date expirationDate = claims.getExpiration();
             Date now = new Date(System.currentTimeMillis());
