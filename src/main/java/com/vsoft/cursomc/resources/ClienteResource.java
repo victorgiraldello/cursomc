@@ -81,6 +81,13 @@ public class ClienteResource {
 		return ResponseEntity.ok().body(listDto);
 	}
 
+	@RequestMapping(value = "/email", method = RequestMethod.GET)
+	public ResponseEntity<Cliente> find(@RequestParam(value = "value") String email) {
+		Cliente obj = service.findByEmail(email);
+		return ResponseEntity.ok().build();
+
+	}
+
 	@RequestMapping(value = "/picture", method = RequestMethod.POST)
 	public ResponseEntity<Void> uploadProfilePicture(@RequestParam(name = "file") MultipartFile multipartFile) {
 		URI uri = service.uploadProfilePicture(multipartFile);
