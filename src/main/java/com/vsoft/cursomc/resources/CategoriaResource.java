@@ -1,6 +1,9 @@
 package com.vsoft.cursomc.resources;
 
 import com.vsoft.cursomc.dto.CategoriaDTO;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -21,8 +24,9 @@ import java.util.stream.Collectors;
 public class CategoriaResource {
 	
 	@Autowired
-	private CategoriaService service;	
+	private CategoriaService service;
 
+	@ApiOperation(value="Busca por id")
 	@RequestMapping(value="/{id}",method=RequestMethod.GET)
 	public ResponseEntity<?> find(@PathVariable Integer id) {
 		
@@ -51,6 +55,9 @@ public class CategoriaResource {
 		return ResponseEntity.noContent().build();
 	}
 
+	@ApiResponses(value = {
+			@ApiResponse(code = 400, message = "Não é possível excluir uma categoria que possui produtos"),
+			@ApiResponse(code = 404, message = "Código inexistente") })
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> delete(@RequestBody Categoria obj, @PathVariable Integer id){
